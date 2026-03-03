@@ -1,0 +1,61 @@
+model: disney-streaming-model-1
+destination: undefined-d07e8
+config:
+  mode: upsert
+  type: dataExtensions
+  object: Churn Risk - Disney Streaming
+  mappings:
+    - to: ACCOUNT_HOME_COUNTRY
+      from: ACCOUNT_HOME_COUNTRY
+      type: standard
+    - to: ACCOUNT_ID
+      from: ACCOUNT_ID
+      type: standard
+    - to: IS_ACTIVATED
+      from: IS_ACTIVATED
+      type: standard
+    - to: IS_ENTITLED
+      from: IS_ENTITLED
+      type: standard
+    - to: PRIMARY_SUBSCRIPTION_BILLING_PLATFORM
+      from: PRIMARY_SUBSCRIPTION_BILLING_PLATFORM
+      type: standard
+    - to: PRIMARY_SUBSCRIPTION_PERIOD
+      from: PRIMARY_SUBSCRIPTION_PERIOD
+      type: standard
+    - to: PRIMARY_SUBSCRIPTION_REPORTING_TYPE
+      from: PRIMARY_SUBSCRIPTION_REPORTING_TYPE
+      type: standard
+    - to: PRIMARY_SUBSCRIPTION_START_DATE
+      from: PRIMARY_SUBSCRIPTION_START_DATE
+      type: standard
+    - to: PRIMARY_SUBSCRIPTION_SUBSCRIPTION_MODEL
+      from: PRIMARY_SUBSCRIPTION_SUBSCRIPTION_MODEL
+      type: standard
+    - to: PRIMARY_SUBSCRIPTION_TYPE
+      from: PRIMARY_SUBSCRIPTION_TYPE
+      type: standard
+    - to: REGION_CPA_L1
+      from: REGION_CPA_L1
+      type: standard
+    - to: STATE_HEALTH
+      from: STATE_HEALTH
+      type: standard
+    - to: STREAMING_SERVICE
+      from: STREAMING_SERVICE
+      type: standard
+    - to: SUBSCRIBER_STATE
+      from: SUBSCRIBER_STATE
+      type: standard
+    - to: SWID
+      from: SWID
+      type: standard
+  dataFolder: '16807'
+  businessUnit: '526001838'
+  configVersion: 0
+  externalIdMapping:
+    to: SUBSCRIBER_SK_ID
+    from: SUBSCRIBER_SK_ID
+schedule:
+  type: manual
+schedulePaused: false
