@@ -1,0 +1,30 @@
+# READ ONLY FILE
+# Changes made here will be ignored. Please use the Hightouch dashboard to create and edit sources and destinations.
+
+sources:
+  snowflake:
+    name: Snowflake
+    type: snowflake
+destinations:
+  s3-2:
+    name: Emails
+    type: s3
+  undefined-d6c60:
+    name: Facebook Custom Audiences
+    type: facebook
+  amp-sync-test:
+    name: AMP Sync Test
+    type: s3
+  undefined-d07e8:
+    name: Salesforce Marketing Cloud
+    type: sfmc
+  undefined-c72eb:
+    name: Google Ads
+    type: google
+  s3:
+    name: Push Notifications
+    type: s3
+  undefined-4ca85:
+    name: Braze Cohorts
+    type: brazeCohorts
+slug: manifest-disney-streaming-t0azb
