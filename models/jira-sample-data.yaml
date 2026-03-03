@@ -1,0 +1,5 @@
+name: JIRA_SAMPLE_DATA
+source: snowflake
+type: table
+tableName: PUBLIC.JIRA_SAMPLE
+primaryKey: ISSUE_ID

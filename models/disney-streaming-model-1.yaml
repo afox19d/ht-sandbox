@@ -1,0 +1,65 @@
+name: Churn Risk - Disney Streaming
+source: snowflake
+type: raw_sql
+rawSql: |-
+  WITH
+    dt AS (
+      SELECT
+        MAX(business_date) dt
+      FROM
+        PUBLIC.SERVICE_SUBSCRIBER_DIM_VW
+    ),
+    sub AS (
+      SELECT
+        sub.subscriber_sk_id,
+        sub.streaming_service,
+        subscriber_home_country,
+        account_home_country,
+        is_activated,
+        U13_FLAG,
+        subscriber_state,
+        state_health,
+        primary_subscription_type,
+        primary_subscription_period,
+        is_entitled,
+        account_id,
+        PRIMARY_SUBSCRIPTION_REPORTING_TYPE,
+        PRIMARY_SUBSCRIPTION_BILLING_PLATFORM,
+        PRIMARY_SUBSCRIPTION_START_DATE,
+        PRIMARY_SUBSCRIPTION_SUBSCRIPTION_MODEL
+      FROM
+        PUBLIC.SERVICE_SUBSCRIBER_DIM_VW sub
+        JOIN dt ON dt.dt = sub.business_date 
+      WHERE
+        sub.streaming_service = 'Disney'
+        AND is_activated = 1
+        AND is_entitled = 1
+        AND PRIMARY_SUBSCRIPTION_PERIOD = 'Annual'
+        AND PRIMARY_SUBSCRIPTION_SUBSCRIPTION_MODEL IN ('Wholesale')
+        AND account_home_country = 'US'
+    )
+  SELECT
+    sub.subscriber_sk_id,
+    MAP.account_id,
+    MAP.swid,
+    sub.streaming_service,
+    account_home_country,
+    is_activated,
+    subscriber_state,
+    state_health,
+    primary_subscription_type,
+    primary_subscription_period,
+    is_entitled,
+    PRIMARY_SUBSCRIPTION_REPORTING_TYPE,
+    PRIMARY_SUBSCRIPTION_BILLING_PLATFORM,
+    PRIMARY_SUBSCRIPTION_START_DATE,
+    PRIMARY_SUBSCRIPTION_SUBSCRIPTION_MODEL,
+    r.region_cpa_l1
+  FROM
+    sub
+    JOIN PUBLIC.SFMC_ACCOUNT_SWID_MAP_VW AS MAP ON MAP.account_id = sub.account_id
+    AND MAP.partner = 'Disney'
+    JOIN PUBLIC.COUNTRY_REGION_DIM_VW r ON sub.subscriber_home_country = r.alpha_code_2
+  WHERE
+    COALESCE(sub.U13_FLAG, 0) = 0
+primaryKey: SUBSCRIBER_SK_ID

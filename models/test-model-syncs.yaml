@@ -1,0 +1,6 @@
+name: test model syncs
+source: snowflake
+description: seeing what we can accomplish by syncing models between workspaces
+type: table
+tableName: PUBLIC.DSS_Viewership_Table
+primaryKey: SUBSCRIBER_SK_ID
